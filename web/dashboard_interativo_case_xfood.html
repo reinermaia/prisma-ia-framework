@@ -621,7 +621,7 @@
       <div class="brand-logo">PR</div>
       <div class="brand-titles">
         <h1>PRISMA-IA Core · DevSecOps Pipeline <span style="font-weight:400; color:var(--text-dim);">|</span> Plataforma Delivery Y (XFood)</h1>
-        <p>Caso Prático Upstream Ideation (Greenfield / Zero Código) · Ingestão Bizagi BPMN & Regras de Negócio</p>
+        <p>Caso Prático Upstream Ideation (Greenfield / Zero Código) · Regras de Negócio</p>
       </div>
     </div>
     <div class="header-badges">
@@ -653,15 +653,14 @@
       <div class="section-header">
         <div class="section-title">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
-            <h2>🎯 Estágio 1: Resolução de Cenário & Ingestão Upstream</h2>
-            <span class="badge" style="background:#0369a1; color:#e0f2fe; font-size:11px; padding:3px 9px; border-radius:4px; font-weight:700; letter-spacing:0.5px;">FRONT-END PRISMA-IA</span>
+            <h2>🎯 Estágio 1: Carregar Dados de Entrada</h2>
+            
           </div>
-          <p>Portal Front-End Oficial do Framework — Configuração do Diretório de Insumos (BPMN Bizagi, Visão, Miro, PO), Ingestão Semântica e Orquestração do Pipeline.</p>
+          
         </div>
         <div class="actions-bar">
-          <button id="btn-run-pipeline-top" class="btn btn-primary" onclick="startPipelineExecution()" disabled style="opacity:0.5; cursor:not-allowed; background:#334155; font-weight:700; display:inline-flex; align-items:center; gap:8px;">
-            <span>🚀</span> Iniciar Pipeline Completo
-          </button>
+          
+            
           <button class="btn btn-secondary" onclick="viewRaw('01_scenario_resolution_upstream.json')">Inspecionar JSON</button>
           <button class="btn btn-secondary" onclick="viewRaw('01_scenario_resolution_upstream.md')">Ver Markdown</button>
         </div>
@@ -671,15 +670,13 @@
       <div class="card" style="margin-bottom:20px; border-left:4px solid #0ea5e9; background:linear-gradient(180deg, #111a2e, #0f172a);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
           <div>
-            <div class="card-subtitle" style="color:#38bdf8;">ESTAÇÃO DE INGESTÃO DO FRAMEWORK</div>
-            <div class="card-title" style="font-size:16px;">Diretório de Origem dos Insumos de Upstream (Ideação & Negócio)</div>
-            <p style="color:var(--text-muted); font-size:12.5px; margin-top:4px;">
-              Aponte para o diretório local contendo os insumos brutos do novo sistema (documentos de visão, regras de negócio, processos BPMN Bizagi/Camunda, perguntas ao PO e quadros conceituais do Miro).
-            </p>
+            
+            <div class="card-title" style="font-size:16px;">Diretório de Origem</div>
+            
           </div>
           <span id="inputs-status-badge" class="badge" style="font-size:11.5px; padding:5px 12px; display:inline-flex; align-items:center; gap:6px; background:#1e293b; color:#94a3b8;">
             <span id="inputs-status-dot" style="width:7px; height:7px; border-radius:50%; background:#94a3b8; display:inline-block;"></span>
-            <span id="inputs-status-text">Aguardando Ingestão (0 Conectados)</span>
+            <span id="inputs-status-text">Aguardando (0 Conectados)</span>
           </span>
         </div>
 
@@ -814,7 +811,7 @@
 
       <!-- TABELA DE ENTIDADES CRÍTICAS -->
       <div class="card">
-        <div class="card-title">Entidades e Fluxos Críticos Identificados no BPMN:</div>
+        <div class="card-title">Entidades e Fluxos:</div>
         <table class="compare-table">
           <thead>
             <tr><th>Entidade / Ator</th><th>Papel no Fluxo Upstream</th><th>Superfície de Risco Identificada</th><th>Regras Associadas</th></tr>
@@ -834,11 +831,11 @@
     <div class="stage-section" id="stage-2">
       <div class="section-header">
         <div class="section-title">
-          <h2>🧠 Estágio 2: GraphRAG & Expansão Ontológica</h2>
+          <h2>🧠 Estágio 2: Visão Ontológica</h2>
           <p>Extração de entidades de domínio, taxonomias de segurança e relações de confiança entre subsistemas.</p>
         </div>
         <div class="actions-bar">
-          <button class="btn btn-secondary active" id="btn-view-ontology-graph" onclick="switchOntologyView('graph')">🕸️ Rede Ontológica (Grafo Visual)</button>
+          <button class="btn btn-secondary active" id="btn-view-ontology-graph" onclick="switchOntologyView('graph')">Grafo Visual</button>
           <button class="btn btn-secondary" id="btn-view-ontology-cards" onclick="switchOntologyView('cards')">📋 Visão em Cards & Tabela</button>
           <button class="btn btn-secondary" onclick="downloadOntologySvg()">Baixar SVG</button>
           <button class="btn btn-secondary" onclick="viewRaw('02_graphrag_ontology_xfood.json')">Inspecionar JSON</button>
@@ -1208,7 +1205,7 @@
               O PRISMA-IA conecta-se ativamente a bases públicas e regulatórias para enriquecer o modelo de ameaças do ecossistema XFood:
             </div>
           </div>
-          <span class="badge badge-blue">FEEDS ATIVOS</span>
+          
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:10px;">
@@ -3649,7 +3646,7 @@ ${r.bdd_gherkin}
         runBtn.style.opacity = '1';
         runBtn.style.boxShadow = '0 4px 16px rgba(14,165,233,0.4)';
         document.getElementById('btn-run-icon').textContent = '🚀';
-        document.getElementById('btn-run-label').textContent = 'Iniciar Ingestão & Executar Pipeline PRISMA-IA';
+        document.getElementById('btn-run-label').textContent = 'Executar Pipeline';
       }
 
       const runBtnTop = document.getElementById('btn-run-pipeline-top');
