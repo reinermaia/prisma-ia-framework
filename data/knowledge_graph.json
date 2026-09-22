@@ -19,6 +19,11 @@
     "CVE-2024-38816": {
       "type": "THREAT_FEED",
       "status": "CISA_KEV_ACTIVE"
+    },
+    "RULE_SEC-REQ-01": {
+      "type": "REGRA_APRENDIDA",
+      "approved": true,
+      "feedback": "Aprovado por Francis Martins com assinatura SEC-SIG-0F5F30A129AB"
     }
   },
   "edges": [
@@ -41,6 +46,16 @@
       "from": "PIX-SETTLE-GW",
       "to": "CVE-2024-38816",
       "relation": "AMEACA_ATIVA"
+    },
+    {
+      "from": "PIX-SETTLE-GW",
+      "to": "RULE_SEC-REQ-01",
+      "relation": "DOUBLE_LOOP_LEARNED"
+    },
+    {
+      "from": "PIX-SETTLE-GW",
+      "to": "RULE_SEC-REQ-01",
+      "relation": "DOUBLE_LOOP_LEARNED"
     }
   ]
 }

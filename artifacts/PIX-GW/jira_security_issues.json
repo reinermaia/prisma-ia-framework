@@ -1,0 +1,38 @@
+{
+  "projectKey": "PIX-",
+  "issues": [
+    {
+      "fields": {
+        "summary": "[SEC-REQ-01] Implementar Não-Repúdio e Idempotência Pix via mTLS",
+        "issuetype": {
+          "name": "Security Requirement"
+        },
+        "priority": {
+          "name": "Highest"
+        },
+        "labels": [
+          "asvs-v3.2",
+          "cwe-384",
+          "prisma-ia",
+          "stride-spoofing"
+        ]
+      }
+    },
+    {
+      "fields": {
+        "summary": "[SEC-REQ-02] Sanitização de Path Traversal no Router HTTP (CVE-2024-38816)",
+        "issuetype": {
+          "name": "Security Requirement"
+        },
+        "priority": {
+          "name": "High"
+        },
+        "labels": [
+          "asvs-v5.1",
+          "cisa-kev",
+          "prisma-ia"
+        ]
+      }
+    }
+  ]
+}

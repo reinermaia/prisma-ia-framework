@@ -1,0 +1,55 @@
+{
+  "project": "PIX-GW",
+  "methodology": "STRIDE + MITRE ATT&CK v15",
+  "total_threats": 4,
+  "threats": [
+    {
+      "id": "THREAT-01",
+      "category": "Spoofing (Falsificação)",
+      "component": "session_handler.go (Gateway Pix)",
+      "description": "Atacante reutiliza token transacional efêmero capturado em trânsito para emitir pagamentos ilegítimos.",
+      "likelihood": "ALTA",
+      "impact": "CRÍTICO",
+      "associated_cwe": "CWE-384 (Session Fixation)",
+      "associated_cve": "N/A",
+      "mitre_attack": "T1556 (Modify Authentication Process)",
+      "mitigation_strategy": "Invalidação mandatória de sessão no Redis com TTL zero e rotação de chave pública mTLS."
+    },
+    {
+      "id": "THREAT-02",
+      "category": "Tampering (Adulteração)",
+      "component": "ledger_dao.go (Contabilidade e Conciliação)",
+      "description": "Injeção de comandos SQL para alterar o status de liquidação de 'PENDENTE' para 'PAGO' sem compensação BACEN.",
+      "likelihood": "MÉDIA",
+      "impact": "CRÍTICO",
+      "associated_cwe": "CWE-89 (SQL Injection)",
+      "associated_cve": "N/A",
+      "mitre_attack": "T1059 (Command and Scripting Interpreter)",
+      "mitigation_strategy": "Parametrização estrita de queries com PreparedStatements e validação de schema ORM."
+    },
+    {
+      "id": "THREAT-03",
+      "category": "Elevation of Privilege (Elevação de Privilégio)",
+      "component": "spring-webmvc:6.1.12 (Router HTTP)",
+      "description": "Path traversal e execução remota de código (RCE) via Functional Endpoints explorando vulnerabilidade ativa catalogada na CISA KEV.",
+      "likelihood": "MÉDIA",
+      "impact": "CRÍTICO",
+      "associated_cwe": "CWE-22 (Path Traversal)",
+      "associated_cve": "CVE-2024-38816",
+      "mitre_attack": "T1190 (Exploit Public-Facing Application)",
+      "mitigation_strategy": "Filtro sanitizador de rota no API Gateway e atualização mandatória da biblioteca para >= 6.1.13."
+    },
+    {
+      "id": "THREAT-04",
+      "category": "Repudiation (Repúdio)",
+      "component": "Instant Settlement Engine",
+      "description": "Participante alega não ter originado a transação Pix devido à ausência de assinatura criptográfica ICP-Brasil.",
+      "likelihood": "BAIXA",
+      "impact": "ALTO",
+      "associated_cwe": "CWE-345 (Insufficient Verification of Data Authenticity)",
+      "associated_cve": "N/A",
+      "mitre_attack": "T1565 (Data Manipulation)",
+      "mitigation_strategy": "Assinatura digital ECDSA secp256r1 com timestamp RFC 3161 obrigatório (BACEN Res. 1/2020 Art. 4)."
+    }
+  ]
+}

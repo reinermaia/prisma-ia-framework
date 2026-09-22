@@ -1,0 +1,15 @@
+{
+  "project": "PIX-GW",
+  "gate_status": "APPROVED",
+  "auditor_name": "Francis Martins",
+  "auditor_role": "Lead Security Architect",
+  "timestamp": "2026-09-22T12:14:30.708549+00:00",
+  "compliance_standards": [
+    "OWASP ASVS 4.0.3",
+    "STRIDE",
+    "BACEN Res. 1/2020",
+    "LGPD"
+  ],
+  "artifacts_sha256": "0f5f30a129ab1b95e0cedfba5100ca79923217b9fe5133944b22c5470dd1200d",
+  "signature_id": "SEC-SIG-0F5F30A129AB"
+}

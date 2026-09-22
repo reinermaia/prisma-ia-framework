@@ -67,19 +67,42 @@ OPENAI_API_KEY=sk-...
 # Ajuda e lista de comandos
 python cli/main.py --help
 
-# Ingestão de insumos (SARIF do Fortify e SBOM CycloneDX)
+#### 3. Comandos Sequenciais do Pipeline & Geração de Artefatos
+
+O framework permite executar cada estágio isoladamente gerando seu respectivo artefato em `artifacts/<projeto>/`, ou orquestrar toda a esteira de ponta a ponta:
+
+```bash
+# [Etapa 1] Ingestão de insumos (SARIF do Fortify e SBOM CycloneDX)
 python cli/main.py ingest --project PIX-GW \
   --sarif examples/brownfield_pix_gateway/fortify_scan.sarif \
   --sbom examples/brownfield_pix_gateway/dependencies_sbom.json
 
-# Consulta a feeds de ameaças ativas (CISA KEV / NVD)
-python cli/main.py threat-feed --cve CVE-2024-38816
+# [Etapa 2] Gera o artefato formal de Modelagem de Ameaças (STRIDE)
+# -> Saída: artifacts/PIX-GW/threat_model.md e threat_model.json
+python cli/main.py threat-model --project PIX-GW
 
-# Inspeção do Grafo de Conhecimento Ontológico Local
-python cli/main.py graph
+# [Etapa 3] Gera o artefato de Requisitos de Segurança (OWASP ASVS 4.0.3 + BDD)
+# -> Saída: artifacts/PIX-GW/security_requirements.md e security_requirements.json
+python cli/main.py sec-reqs --project PIX-GW
 
-# Execução completa da esteira de ponta a ponta
-python cli/main.py run-all
+# [Etapa 4] Orquestra a Deliberação Tripartite Multiagente (Debate Socrático)
+# -> Saída: artifacts/PIX-GW/tripartite_deliberation.md
+python cli/main.py deliberate --project PIX-GW
+
+# [Etapa 5] HITL Security Gate: Auditoria Humana e Assinatura Digital Criptográfica
+# -> Saída: artifacts/PIX-GW/hitl_compliance_receipt.json (SHA-256)
+python cli/main.py hitl-gate --project PIX-GW --auditor "Francis Martins"
+
+# [Etapa 6] Exportação de Artefatos para CI/CD (Jira, GitLab CI e Cucumber BDD)
+# -> Saída: jira_security_issues.json, gitlab_security_policy.yml, security_acceptance.feature
+python cli/main.py export --project PIX-GW
+
+# [Pipeline Completo] Executa todas as etapas sequenciais automaticamente:
+python cli/main.py pipeline --project PIX-GW
+
+# Comandos de Suporte e Inspeção:
+python cli/main.py threat-feed --cve CVE-2024-38816  # Consulta CISA KEV / NVD
+python cli/main.py graph                            # Inspeciona GraphRAG On-Prem
 ```
 
 ---

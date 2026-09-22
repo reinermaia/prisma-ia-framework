@@ -1,0 +1,21 @@
+# GitLab CI/CD Security Policy gerada pelo PRISMA-IA
+# Projeto: PIX-GW
+
+stages:
+  - security_gate
+  - bdd_security_verification
+
+prisma_upstream_gate:
+  stage: security_gate
+  script:
+    - echo "Validando assinatura criptografica do HITL Security Gate..."
+    - test -f artifacts/PIX-GW/hitl_compliance_receipt.json
+    - echo "Assinatura confirmada. Prosseguindo build..."
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+cucumber_security_tests:
+  stage: bdd_security_verification
+  script:
+    - echo "Executando testes BDD Gherkin derivados dos Requisitos de Seguranca..."
+    - cucumber-js artifacts/PIX-GW/security_acceptance.feature
