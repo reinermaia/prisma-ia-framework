@@ -1,165 +1,263 @@
 # PRISMA-IA Core Framework 🛡️🧠
 
-> **Continuous Threat Modeling & Security Requirements Multi-Agentic Framework (LLM-Agnostic)**  
-> Inspirado na engenharia de prompts modulares e skills pedagógicas de projetos de referência como o *Reversa* do Professor Sandeco.
+> **Continuous Threat Modeling & Security Requirements Multi-Agentic Pipeline (LLM-Agnostic & On-Premise Ready)**  
+> *Inspired by modular prompt engineering and open-source pedagogical agent frameworks (such as Prof. Sandeco's modular architectures).*
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Ollama Ready](https://img.shields.io/badge/Ollama-On--Premise_Ready-green.svg)](https://ollama.ai)
-[![SARIF 2.1.0](https://img.shields.io/badge/Standard-SARIF_2.1.0-orange.svg)](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html)
+[![Ollama Ready](https://img.shields.io/badge/Ollama-On--Premise_Air--Gapped-green.svg)](https://ollama.ai)
+[![Standard: SARIF 2.1.0](https://img.shields.io/badge/Standard-SARIF_2.1.0-orange.svg)](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html)
+[![Compliance: OWASP ASVS 4.0.3](https://img.shields.io/badge/Compliance-OWASP_ASVS_4.0.3-brightgreen.svg)](https://owasp.org/www-project-application-security-verification-standard/)
+[![Methodology: STRIDE](https://img.shields.io/badge/Methodology-STRIDE-red.svg)](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats)
 
 ---
 
-## 💡 Visão Geral
+## 💡 Overview
 
-O **PRISMA-IA** é um framework de engenharia de software e segurança contínua (*DevSecOps Upstream*) concebido para resolver um dos maiores desafios do desenvolvimento moderno: **como antecipar a modelagem de ameaças e a formulação de requisitos de segurança formais antes da escrita do código**, sem depender de ferramentas proprietárias caras e sem incorrer nos riscos de alucinação e violação de privacidade de LLMs comerciais convencionais.
+**PRISMA-IA** is a specialized enterprise DevSecOps framework designed to solve one of the most critical challenges in modern software engineering: **how to automate formal threat modeling and derive verifiable security requirements during the upstream phase (before code is written)**.
 
-### 🌟 Por que não apenas um ChatGPT genérico?
-1. **GraphRAG Ontológico Local:** Conecta-se à memória institucional da sua organização (microsserviços internos, histórico de incidentes corporativos, políticas de segurança).
-2. **Feeds de Ameaças em Tempo Real:** Consulta ativa ao **CISA KEV** (Known Exploited Vulnerabilities) e **NVD CVEs** mais recentes antes de propor mitigações.
-3. **Ingestão Plugável de Padrões Abertos:** Lê diretamente relatórios **SARIF 2.1.0** (Fortify, SonarQube, CodeQL) e **CycloneDX/SPDX SBOM** (Dependency-Track).
-4. **Deliberação Tripartite Desenviesada:** Três agentes especializados (Requisitos, Segurança e Arquitetura) com isolamento de contexto e debate socrático.
-5. **Auditoria Humana (HITL Gate) & Double-Loop Learning:** Assinatura digital do auditor que retroalimenta o Grafo de Conhecimento corporativo a cada ciclo.
+By leveraging an LLM-agnostic multi-agent deliberation engine, an on-premise Knowledge Graph (GraphRAG), real-time threat intelligence feeds (CISA KEV / NVD CVEs), and industry-standard scanners (SARIF / CycloneDX SBOM), PRISMA-IA bridges the gap between software requirements, architecture, and security governance without exposing proprietary assets or hallucinating policies.
 
 ---
 
-## 🎯 Os Dois Cenários de Operação
+## 🌟 Why PRISMA-IA vs. Generic ChatGPT?
 
-| Cenário | Descrição | Resolução PRISMA-IA |
+| Critical Dimension | Commercial Off-the-Shelf LLM (e.g. ChatGPT) | PRISMA-IA Enterprise Framework |
 | :--- | :--- | :--- |
-| **Cenário 1: Ideação / Upstream (Greenfield)** | Sistemas novos sem código-fonte ou relatórios prévios. | **Baseline Público Pré-treinado** (GitHub/OWASP). Elimina o *Cold Start* ao injetar arquétipos de segurança maduros. |
-| **Cenário 2: Evolução (Brownfield)** | Sistemas legados com dívida técnica e histórico de falhas. | **Memória Institucional Evolutiva**. Ingestão de SARIF histórico, SBOMs e aprendizado de ciclos anteriores via GraphRAG. |
+| **Organizational Memory** | **Stateless.** No institutional memory; blind to internal microservices, proprietary APIs, and past corporate incidents. | **On-Premise GraphRAG.** Semantic ontology mapping internal architecture, corporate auth brokers, compliance standards, and past incident logs. |
+| **Threat Freshness** | **Frozen in Time.** Restricted to model training cutoff; unaware of zero-day exploits published today. | **Real-Time Threat Feeds.** Continuous sync with **CISA KEV**, **NVD CVEs API 2.0**, and **MITRE ATT&CK v15** before proposing mitigations. |
+| **Tool Ingestion** | **Manual & Unstructured.** Requires copy-pasting raw logs; exceeds token context and loses relational graphs. | **Native Open Standards.** Standard parsers for **SARIF 2.1.0** (Fortify, SonarQube, CodeQL) and **CycloneDX / SPDX SBOM** (Dependency-Track). |
+| **Privacy & Compliance** | **Public Cloud Risk.** Prompts and code snippets flow through third-party cloud servers, violating banking secrecy and GDPR/LGPD. | **100% On-Premise & Air-Gapped.** Runs fully locally with open models (e.g., Llama-3.3, Mistral-Nemo, DeepSeek-R1 via Ollama). |
+| **Rigor & Deliberation** | **Monolithic & Biased.** Single probabilistic output prone to confirmation bias (*Syndrome of Agreement*). | **Tripartite Multi-Agent Engine.** 3 specialized personas (Requirements, Security, Architecture) in dialectic debate with context isolation. |
+| **Governance & HITL** | **Black-Box Generation.** No formal gate, auditable verification, or cryptographic sign-off. | **HITL Security Gate.** Mandatory human auditor checkpoint with SHA-256 digital signature and **Double-Loop Learning**. |
 
 ---
 
-## 🚀 Como Usar o Framework
+## 🎯 Dual-Track Business Ingestion Scenarios
 
-Você pode utilizar este framework de **duas formas complementares**:
+PRISMA-IA addresses two distinct enterprise reality scenarios:
 
-### Modo 1: Via Linha de Comando (CLI Interativa em Python)
+```
+                      ┌──────────────────────────────────────────────┐
+                      │            PRISMA-IA INGESTION ENGINE        │
+                      └──────────────────────┬───────────────────────┘
+                                             │
+             ┌───────────────────────────────┴───────────────────────────────┐
+             ▼                                                               ▼
+┌──────────────────────────────────────────┐    ┌──────────────────────────────────────────┐
+│  SCENARIO 1: GREENFIELD / UPSTREAM       │    │   SCENARIO 2: BROWNFIELD / EVOLUTION     │
+│  (Discovery, Epics, User Stories, RFCs)  │    │   (Existing Repos, Legacy Debt, SARIF)   │
+├──────────────────────────────────────────┤    ├──────────────────────────────────────────┤
+│ • Challenge: Cold-start zero context.    │    │ • Challenge: Deep legacy technical debt. │
+│ • Solution: Pre-trained baseline curated │    │ • Solution: Enriched institutional       │
+│   from open GitHub/OWASP archetypes.     │    │   memory via local GraphRAG and past     │
+│   Never starts from zero!                │    │   cycle audit feedbacks.                 │
+└──────────────────────────────────────────┘    └──────────────────────────────────────────┘
+```
 
-#### 1. Instalação
+---
+
+## 🏗️ Sequential Pipeline Architecture
+
+The pipeline moves deterministically through 6 formal stages, persisting structured markdown and JSON artifacts at each step in `artifacts/<project>/`:
+
+```
+┌─────────────┐     ┌──────────────────┐     ┌────────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
+│ 01. Ingest  │ ──► │ 02. Threat Model │ ──► │ 03. Sec Reqs   │ ──► │ 04. Tri-Agent│ ──► │ 05. HITL    │ ──► │ 06. CI/CD    │
+│ SARIF/SBOM  │     │ STRIDE / MITRE   │     │ ASVS 4.0.3/BDD │     │ Deliberation │     │ Audit & Sign│     │ Dispatch     │
+└─────────────┘     └──────────────────┘     └────────────────┘     └──────────────┘     └─────────────┘     └──────────────┘
+```
+
+---
+
+## 🚀 Quickstart & Installation
+
+### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/<seu-usuario>/prisma-ia-framework.git
+git clone https://github.com/reinermaia/prisma-ia-framework.git
 cd prisma-ia-framework
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-#### 2. Configuração do Provedor de LLM (.env)
-Você pode rodar **100% On-Premise e gratuito via Ollama** ou conectar suas chaves de API:
+### 2. Configure Your LLM Provider (`.env`)
+The framework is completely LLM-agnostic:
 ```env
-# Opção A: Ollama Local (100% On-Premise / Zero Custos de Nuvem)
+# Option A: Ollama Local (100% On-Premise, Free, Air-Gapped)
 LLM_PROVIDER=ollama
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=llama3.3:70b
 
-# Opção B: Simulação Determinística Offline (Para testes imediatos)
+# Option B: Offline High-Fidelity Simulation (Immediate testing)
 LLM_PROVIDER=mock
 
-# Opção C: Provedores Comerciais (OpenAI, Claude, Gemini)
+# Option C: Commercial Cloud Providers (Optional)
 LLM_PROVIDER=openai
 OPENAI_API_KEY=sk-...
 ```
 
-#### 3. Comandos da CLI
+---
+
+## 💻 CLI Command Reference (Step-by-Step)
+
+Each pipeline stage can be executed independently to inspect its generated artifact, or orchestrated together end-to-end:
+
+### Stage 1: Input Ingestion & Scenario Detection
+Ingests static analysis reports (SARIF) and software bills of materials (CycloneDX SBOM):
 ```bash
-# Ajuda e lista de comandos
-python cli/main.py --help
-
-#### 3. Comandos Sequenciais do Pipeline & Geração de Artefatos
-
-O framework permite executar cada estágio isoladamente gerando seu respectivo artefato em `artifacts/<projeto>/`, ou orquestrar toda a esteira de ponta a ponta:
-
-```bash
-# [Etapa 1] Ingestão de insumos (SARIF do Fortify e SBOM CycloneDX)
 python cli/main.py ingest --project PIX-GW \
   --sarif examples/brownfield_pix_gateway/fortify_scan.sarif \
   --sbom examples/brownfield_pix_gateway/dependencies_sbom.json
-
-# [Etapa 2] Gera o artefato formal de Modelagem de Ameaças (STRIDE)
-# -> Saída: artifacts/PIX-GW/threat_model.md e threat_model.json
-python cli/main.py threat-model --project PIX-GW
-
-# [Etapa 3] Gera o artefato de Requisitos de Segurança (OWASP ASVS 4.0.3 + BDD)
-# -> Saída: artifacts/PIX-GW/security_requirements.md e security_requirements.json
-python cli/main.py sec-reqs --project PIX-GW
-
-# [Etapa 4] Orquestra a Deliberação Tripartite Multiagente (Debate Socrático)
-# -> Saída: artifacts/PIX-GW/tripartite_deliberation.md
-python cli/main.py deliberate --project PIX-GW
-
-# [Etapa 5] HITL Security Gate: Auditoria Humana e Assinatura Digital Criptográfica
-# -> Saída: artifacts/PIX-GW/hitl_compliance_receipt.json (SHA-256)
-python cli/main.py hitl-gate --project PIX-GW --auditor "Francis Martins"
-
-# [Etapa 6] Exportação de Artefatos para CI/CD (Jira, GitLab CI e Cucumber BDD)
-# -> Saída: jira_security_issues.json, gitlab_security_policy.yml, security_acceptance.feature
-python cli/main.py export --project PIX-GW
-
-# [Pipeline Completo] Executa todas as etapas sequenciais automaticamente:
-python cli/main.py pipeline --project PIX-GW
-
-# Comandos de Suporte e Inspeção:
-python cli/main.py threat-feed --cve CVE-2024-38816  # Consulta CISA KEV / NVD
-python cli/main.py graph                            # Inspeciona GraphRAG On-Prem
 ```
 
 ---
 
-### Modo 2: Via Skills Modulares (Prompts Puros em Markdown)
-
-Se preferir utilizar em IDEs assistidas por IA (como **Cursor, Claude Projects, Antigravity, ChatGPT Custom GPTs**), basta navegar até a pasta [`skills/`](skills/) e carregar as instruções modulares:
-
-- `skills/01_ingestao_cenarios.md`: Protocolo de entrada (Greenfield vs Brownfield).
-- `skills/02_graphrag_ontologia.md`: Extração e correlação ontológica.
-- `skills/03_threat_intel_cve.md`: Enriquecimento com ameaças ativas.
-- `skills/04_agente_requisitos.md`: Persona do Agente de Requisitos (INVEST / BDD).
-- `skills/05_agente_seguranca.md`: Persona do Agente de Segurança (STRIDE / ASVS 4.0.3).
-- `skills/06_agente_arquitetura.md`: Persona do Agente de Arquitetura (SLA / Viabilidade).
-- `skills/07_deliberacao_tripartite.md`: Protocolo de consenso e desenviesamento.
-- `skills/08_hitl_security_gate.md`: Auditoria e assinatura digital do especialista.
-- `skills/09_double_loop_learning.md`: Retroalimentação do Grafo de Conhecimento.
+### Stage 2: Generate Formal Threat Model (STRIDE)
+Performs automated STRIDE categorization crossed with the MITRE ATT&CK enterprise matrix and live CISA KEV feeds:
+```bash
+python cli/main.py threat-model --project PIX-GW
+```
+- **Generated Artifacts:**
+  - 📄 [`artifacts/PIX-GW/threat_model.md`](artifacts/PIX-GW/threat_model.md)
+  - 📊 [`artifacts/PIX-GW/threat_model.json`](artifacts/PIX-GW/threat_model.json)
+- **Identified Threats:**
+  - `THREAT-01 (Spoofing)`: Transaction token fixation and replay risk (`CWE-384`).
+  - `THREAT-02 (Tampering)`: Ledger reconciliation SQL injection (`CWE-89`).
+  - `THREAT-03 (Elevation of Privilege)`: Router path traversal / RCE exploit (`CVE-2024-38816`).
+  - `THREAT-04 (Repudiation)`: Non-repudiation failure under banking regulation BACEN Res. 1/2020.
 
 ---
 
-## 📂 Estrutura do Repositório
+### Stage 3: Generate Verifiable Security Requirements (OWASP ASVS 4.0.3 + BDD)
+Derives testable requirements compliant with ASVS Level 2/3 and formats them with INVEST criteria and Cucumber BDD Gherkin scenarios:
+```bash
+python cli/main.py sec-reqs --project PIX-GW
+```
+- **Generated Artifacts:**
+  - 📄 [`artifacts/PIX-GW/security_requirements.md`](artifacts/PIX-GW/security_requirements.md)
+  - 📊 [`artifacts/PIX-GW/security_requirements.json`](artifacts/PIX-GW/security_requirements.json)
+- **Synthesized Requirements:**
+  - `SEC-REQ-01`: Non-repudiation and transaction idempotency via mTLS and ECDSA secp256r1.
+  - `SEC-REQ-02`: Canonical path sanitization filter for HTTP Router (CVE-2024-38816 mitigation).
+  - `SEC-REQ-03`: Strict PreparedStatement parametrization in ledger queries.
+
+---
+
+### Stage 4: Multi-Agent Tripartite Deliberation (Socratic Debate)
+Spawns the 3 specialized agent personas with context isolation to debate latency SLAs vs. cryptographic overhead:
+```bash
+python cli/main.py deliberate --project PIX-GW
+```
+- **Generated Artifact:**
+  - 📄 [`artifacts/PIX-GW/tripartite_deliberation.md`](artifacts/PIX-GW/tripartite_deliberation.md)
+- **Debate Rounds:**
+  - *Round 1 (Independent Theses):* RE-Agent, SEC-Agent, and ARCH-Agent define standalone goals.
+  - *Round 2 (Cross Antitheses):* ARCH-Agent challenges latency spikes; SEC-Agent negotiates async HSM offloading.
+  - *Round 3 (Consensus Synthesis):* Unanimous agreement with zero syndrome-of-agreement bias.
+
+---
+
+### Stage 5: Human-in-the-Loop (HITL) Security Gate & Digital Sign-off
+Audits the requirements and stamps a cryptographic SHA-256 certificate, persisting feedback to the local ontology (Double-Loop Learning):
+```bash
+python cli/main.py hitl-gate --project PIX-GW --auditor "Francis Martins"
+```
+- **Generated Artifact:**
+  - 📄 [`artifacts/PIX-GW/hitl_compliance_receipt.json`](artifacts/PIX-GW/hitl_compliance_receipt.json)
+- **Security Receipt:**
+  ```json
+  {
+    "project": "PIX-GW",
+    "gate_status": "APPROVED",
+    "auditor_name": "Francis Martins",
+    "signature_id": "SEC-SIG-0F5F30A129AB",
+    "artifacts_sha256": "0f5f30a129ab1b95e0cedfba5100ca79923217b9fe5133944b22c5470dd1200d",
+    "timestamp": "2026-09-22T12:13:46Z"
+  }
+  ```
+
+---
+
+### Stage 6: Export CI/CD Artifacts (Jira, GitLab CI, Cucumber)
+Translates approved requirements into enterprise DevOps pipelines:
+```bash
+python cli/main.py export --project PIX-GW
+```
+- **Generated Artifacts:**
+  - `artifacts/PIX-GW/jira_security_issues.json` (Ready for Jira REST API import)
+  - `artifacts/PIX-GW/gitlab_security_policy.yml` (Quality gate policy for `.gitlab-ci.yml`)
+  - `artifacts/PIX-GW/security_acceptance.feature` (Automated Gherkin test suite)
+
+---
+
+### ⚡ End-to-End Orchestrator (All Stages in One Command)
+Run the entire pipeline sequentially with streaming terminal progress:
+```bash
+python cli/main.py pipeline --project PIX-GW
+```
+
+---
+
+### Support & Inspection Commands
+```bash
+# Query live CISA KEV and NVD vulnerability databases
+python cli/main.py threat-feed --cve CVE-2024-38816
+
+# Inspect on-premise Knowledge Graph ontology
+python cli/main.py graph
+```
+
+---
+
+## 📁 Repository Structure
 
 ```text
 prisma-ia-framework/
-├── .env.example                 # Configuração de provedores (Ollama, OpenAI, Claude)
-├── .gitignore                   # Exclusão de caches, dados de runtime e chaves
-├── README.md                    # Documentação do projeto
-├── requirements.txt             # Dependências leves (rich, pydantic, requests)
-├── cli/                         # Interface de Linha de Comando (Rich terminal)
-│   └── main.py
-├── core/                        # Núcleo técnico agnóstico
-│   ├── llm_adapter.py           # Conector universal para qualquer LLM
-│   ├── sarif_parser.py          # Leitor universal de relatórios SARIF 2.1.0
-│   ├── sbom_parser.py           # Leitor universal de CycloneDX SBOM
-│   └── knowledge_graph.py       # GraphRAG local em JSON/GraphML
-├── skills/                      # As 9 instruções estruturadas em Markdown
-└── examples/                    # Casos de uso reais (PayZero Mobile e Pix Gateway)
+├── .env.example                     # Environment template for Ollama/APIs
+├── .gitignore                       # Clean Git exclusion rules
+├── README.md                        # Documentation (English)
+├── requirements.txt                 # Lightweight dependencies (rich, pydantic, requests)
+├── pyproject.toml                   # Standard Python packaging (pip install -e .)
+│
+├── skills/                          # 9 Modular Prompts/Skills (Markdown format)
+│   ├── 01_ingestao_cenarios.md      # Scenario 1 (Greenfield) vs Scenario 2 (Brownfield)
+│   ├── 02_graphrag_ontologia.md     # Knowledge Graph traversal & enterprise rules
+│   ├── 03_threat_intel_cve.md       # CISA KEV, NVD CVEs, and MITRE enrichment
+│   ├── 04_agente_requisitos.md      # RE-Agent persona (INVEST / BDD Gherkin)
+│   ├── 05_agente_seguranca.md       # SEC-Agent persona (STRIDE / ASVS 4.0.3)
+│   ├── 06_agente_arquitetura.md     # ARCH-Agent persona (SLA, trade-offs, scalability)
+│   ├── 07_deliberacao_tripartite.md # Dialectic debate and consensus protocol
+│   ├── 08_hitl_security_gate.md     # Auditor review and cryptographic signature
+│   └── 09_double_loop_learning.md   # Double-Loop feedback protocol
+│
+├── core/                            # Agnostic technical engines
+│   ├── llm_adapter.py               # Universal wrapper (Ollama, OpenAI, Claude, Gemini)
+│   ├── threat_modeler.py            # STRIDE threat modeling engine
+│   ├── sec_requirements_generator.py# OWASP ASVS & BDD requirements generator
+│   ├── deliberation_engine.py       # Tripartite 3-round dialectic orchestrator
+│   ├── sarif_parser.py              # Universal OASIS SARIF 2.1.0 parser
+│   ├── sbom_parser.py               # CycloneDX 1.5 SBOM parser
+│   ├── knowledge_graph.py           # On-premise JSON/Neo4j ontology manager
+│   └── exporter.py                  # Jira, GitLab CI, and Cucumber exporter
+│
+├── cli/                             # Rich-powered terminal interface
+│   └── main.py                      # CLI entrypoint with granular subcommands
+│
+├── artifacts/                       # Generated project output artifacts
+│   └── PIX-GW/                      # Real sample outputs (STRIDE, ASVS, Receipts)
+│
+└── examples/                        # Real-world project input datasets
+    ├── greenfield_payzero/          # Scenario 1: Mobile SuperApp user stories & RFC
+    └── brownfield_pix_gateway/      # Scenario 2: Banking Gateway SARIF & SBOM
 ```
 
 ---
 
-## 📤 Como subir este projeto no seu GitHub
+## 📝 Academic Citation & Research Foundation
 
-Para publicar este repositório na sua conta do GitHub:
+This framework was developed as a practical engineering spin-off from the Master's thesis in Software Engineering at the **University of Brasília (UnB)**:
 
-1. Crie um repositório vazio no GitHub chamado `prisma-ia-framework`.
-2. No seu terminal, dentro desta pasta, execute:
-```bash
-git remote add origin https://github.com/<seu-usuario>/prisma-ia-framework.git
-git branch -M main
-git push -u origin main
-```
-
----
-
-## 📄 Licença e Citação
-
-Desenvolvido como desdobramento prático da pesquisa de Mestrado em Engenharia de Software da Universidade de Brasília (UnB) por **Francis R. M. Martins** sob orientação da **Profª. Elaine Venson**.
-
-Licenciado sob [Apache License 2.0](LICENSE).
+- **Author:** Francis R. M. Martins  
+- **Advisor:** Profª. Drª. Elaine Venson  
+- **Institution:** Universidade de Brasília (UnB) — Department of Computer Science (CIC)  
+- **License:** [Apache License 2.0](LICENSE)
