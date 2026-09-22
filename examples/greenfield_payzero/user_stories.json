@@ -1,0 +1,20 @@
+[
+  {
+    "id": "US-01",
+    "title": "Iniciação de Pagamento Instantâneo sem Fricção",
+    "description": "Como usuário do SuperApp PayZero, quero realizar transferências via chave Pix e QR Code com confirmação em menos de 2 segundos.",
+    "acceptance_criteria": [
+      "Dado que o saldo é suficiente, a transação deve ser confirmada em até 2 segundos.",
+      "O usuário deve receber comprovante digital com hash de autenticidade."
+    ]
+  },
+  {
+    "id": "US-02",
+    "title": "Autenticação Biométrica e Device Binding",
+    "description": "Como cliente, quero vincular o aplicativo ao meu aparelho celular para garantir que ninguém faça transações sem a minha biometria.",
+    "acceptance_criteria": [
+      "O app deve vincular o hardware ID à chave pública no primeiro login.",
+      "Tentativas de bypass de root/jailbreak devem encerrar a sessão imediatamente."
+    ]
+  }
+]

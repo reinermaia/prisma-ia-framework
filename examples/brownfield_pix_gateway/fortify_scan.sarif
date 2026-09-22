@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Micro Focus Fortify Static Code Analyzer",
+          "semanticVersion": "23.2.0.012",
+          "rules": [
+            {
+              "id": "CWE-384",
+              "name": "Session Fixation in Transaction Flow",
+              "shortDescription": { "text": "Token de autorização prévia não é invalidado após liquidação Pix." }
+            },
+            {
+              "id": "CWE-89",
+              "name": "SQL Injection in Ledger Repository",
+              "shortDescription": { "text": "Possibilidade de injeção em queries dinâmicas de conciliação contábil." }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CWE-384",
+          "level": "error",
+          "message": { "text": "Reaproveitamento de token transacional detectado no endpoint /api/v2/pix/settle." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/main/go/settlement/session_handler.go" },
+                "region": { "startLine": 142 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CWE-89",
+          "level": "warning",
+          "message": { "text": "Interpolação de parâmetros não sanitizados no DAO de reconciliação." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/main/go/repository/ledger_dao.go" },
+                "region": { "startLine": 88 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prisma-ia-framework"
+version = "1.0.0"
+description = "Continuous Threat Modeling & Security Requirements Multi-Agentic Framework (LLM-Agnostic)"
+readme = "README.md"
+authors = [{ name = "Francis Martins" }]
+requires-python = ">=3.9"
+dependencies = [
+    "rich>=13.7.0",
+    "pydantic>=2.6.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.1"
+]
+
+[project.scripts]
+prisma = "cli.main:main"
