@@ -98,9 +98,55 @@ OPENAI_API_KEY=sk-...
 
 ---
 
-## 💻 CLI Command Reference (Step-by-Step)
+## 🎮 Dual Operational Modes: Web GUI & Headless CLI
 
-Each pipeline stage can be executed independently to inspect its generated artifact, or orchestrated together end-to-end:
+PRISMA-IA offers **two complementary ways to run the pipeline**, adapting to developer workflows, automated CI/CD servers, or architectural review boards:
+
+| Dimension | Mode 1: Interactive Web Dashboard 🌐 | Mode 2: Headless Terminal CLI 💻 |
+| :--- | :--- | :--- |
+| **Primary Audience** | Security Architects, Product Owners, HITL Auditors, Leadership | DevSecOps Engineers, Backend Developers, CI/CD Agents |
+| **User Experience** | Visual, interactive 8-stage stepper, GraphRAG Neo4j-style graph, clickable DFD | Fast, headless, scriptable, streaming Rich terminal output |
+| **Human-in-the-Loop** | Real-time visual deliberation grid (Approve, Veto, Qualified Approval) | CLI command checkpoint (`hitl-gate`) with JSON receipt |
+| **Disk Integration** | In-browser preview or native disk execution via local bridge daemon (`port 8765`) | Direct local file system read/write in `artifacts/<project>/` |
+| **Execution Command** | Open `web/index.html` (Optional daemon: `python web/prisma_local_bridge.py`) | `python cli/main.py pipeline --project <NAME>` |
+
+---
+
+## 🌐 Mode 1: Interactive Web Dashboard (Visual Frontend)
+
+For visual architecture reviews, threat modeling workshops, and interactive human governance, PRISMA-IA includes an **interactive 8-stage Web Dashboard**:
+
+### How to Run:
+1. **Direct Standalone Mode:**
+   Simply open [`web/index.html`](web/index.html) in any modern web browser (Google Chrome, Firefox, Edge, Safari).
+2. **Local Bridge Mode (One-Click Native Disk Pipeline Execution):**
+   Start the local lightweight daemon to allow the browser to run physical pipelines and write verified artifacts to disk:
+   ```bash
+   python web/prisma_local_bridge.py
+   # Daemon listens locally on http://127.0.0.1:8765
+   ```
+   Now open [`web/index.html`](web/index.html), select your inputs directory in Stage 1, and click **"Executar Pipeline Completo"**.
+
+### The 8 Interactive Stages:
+1. **01. Resolução Upstream:** Visual input catalog (BPMN processes, Word specs, Miro boards, PO discovery briefs), parameter selection (Greenfield vs Brownfield, ASVS Level), and live pipeline execution trigger.
+2. **02. Grafo Ontológico (GraphRAG Neo4j Style):** Interactive semantic SVG network with 10 nodes and 12 relations, dynamic category filtering (*Actors*, *Fintech/Pix*, *BPMN Rules*, *LGPD Compliance*), and a lateral inspector revealing node SLAs, attack surfaces, and business rules upon click.
+3. **03. Inteligência de Ameaças:** Real-time threat feed matrix correlated with direct public links to official databases: **NIST NVD** (`CVE-2024-38816`, `CVE-2023-44487`), **CISA KEV**, **MITRE ATT&CK** (`T1190`, `T1078`), **OWASP API Top 10** (BOLA, SSRF), and **BACEN Pix**.
+4. **04. Modelagem STRIDE:** Visual **OWASP Threat Dragon DFD** with 5 trust boundaries, process nodes, data stores, and clickable threat pins (T1 to T6) with live mitigation detail popups.
+5. **05. Requisitos de Segurança:** Dual view switcher:
+   - *Institutional A4 Document View:* Formal specification with RFC 2119 SHALL criteria, LGPD Art. 46/52 data inventory, technical step-by-step implementation guide, and DOCX download;
+   - *Agile User Stories View:* INVEST-compliant user stories with Cucumber BDD Gherkin acceptance criteria ready for QA automation.
+6. **06. Deliberação Dialética:** Verbatim transcript of the Tripartite multi-agent socratic debate between **Requirements Agent (RE)**, **Security Agent (SEC)**, and **Architecture Agent (ARCH)**.
+7. **07. Deliberação do Especialista (HITL Governance Quality Gate):** Interactive Human-in-the-Loop decision grid. The specialist evaluates all generated artifacts with dedicated action buttons:
+   - ✅ **Aprovar Sem Ressalvas:** Stamps SHA-256 digital signature and unblocks CI/CD dispatch;
+   - ❌ **Reprovar (Veto):** Halts the pipeline, records architectural veto justification, and blocks downstream release;
+   - ⚠️ **Aprovar com Ressalvas:** Injects new security requirements dynamically (e.g., PIN rate limiting & expiration), triggers Double-Loop organizational learning, updates Jira/Cucumber backlogs, and recalculates the digital signature.
+8. **08. Despacho CI/CD:** Live tabbed views of Jira REST API payloads, GitLab CI security quality gates (`.gitlab-ci.yml`), and Cucumber BDD test suites (`.feature`).
+
+---
+
+## 💻 Mode 2: Headless CLI Command Reference (Step-by-Step)
+
+Each pipeline stage can also be executed independently via terminal commands or orchestrated together end-to-end:
 
 ### Stage 1: Input Ingestion & Scenario Detection
 Ingests static analysis reports (SARIF) and software bills of materials (CycloneDX SBOM):
@@ -214,10 +260,15 @@ python cli/main.py graph
 ```text
 prisma-ia-framework/
 ├── .env.example                     # Environment template for Ollama/APIs
-├── .gitignore                       # Clean Git exclusion rules
+├── .gitignore                       # Clean Git exclusion rules (strictly ignores inputs & outputs)
 ├── README.md                        # Documentation (English)
 ├── requirements.txt                 # Lightweight dependencies (rich, pydantic, requests)
 ├── pyproject.toml                   # Standard Python packaging (pip install -e .)
+│
+├── web/                             # Interactive Web GUI Dashboard & Local Bridge
+│   ├── index.html                   # 8-Stage Interactive Frontend Dashboard
+│   ├── compile_balanced_dashboard.py# Script to compile & bundle data into the frontend
+│   └── prisma_local_bridge.py       # Local lightweight HTTP daemon bridge (port 8765)
 │
 ├── skills/                          # 9 Modular Prompts/Skills (Markdown format)
 │   ├── 01_ingestao_cenarios.md      # Scenario 1 (Greenfield) vs Scenario 2 (Brownfield)
@@ -243,10 +294,14 @@ prisma-ia-framework/
 ├── cli/                             # Rich-powered terminal interface
 │   └── main.py                      # CLI entrypoint with granular subcommands
 │
-├── artifacts/                       # Generated project output artifacts
+├── artifacts/                       # Sample baseline artifacts
 │   └── PIX-GW/                      # Real sample outputs (STRIDE, ASVS, Receipts)
 │
-└── examples/                        # Real-world project input datasets
+└── examples/                        # Real-world project input datasets & runners
+    ├── greenfield_case_xfood/       # Scenario 1: Delivery Y (Bizagi BPMN upstream runner)
+    │   ├── run_prisma_pipeline.py   # Pipeline runner orchestrating stages 1-8
+    │   ├── executar_pipeline_v2.bat # Fast Windows execution batch script
+    │   └── generate_case_xfood.py   # Synthetic baseline generator
     ├── greenfield_payzero/          # Scenario 1: Mobile SuperApp user stories & RFC
     └── brownfield_pix_gateway/      # Scenario 2: Banking Gateway SARIF & SBOM
 ```

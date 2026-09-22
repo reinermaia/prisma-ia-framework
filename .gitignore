@@ -40,3 +40,25 @@ data/cache/
 data/runs/
 data/graph_storage/
 *.log
+
+# ==============================================================================
+# Insumos de Entrada Brutos (Upstream / Ideacao / Arquivos Proprietarios)
+# ==============================================================================
+input/
+inputs/
+*.docx
+*.bpmn
+*.bpm
+*.vsdx
+*.pdf
+export_bizag_*.png
+jornada_cliente_*
+scratch_*
+
+# ==============================================================================
+# Saidas e Artefatos Gerados pelo Pipeline
+# ==============================================================================
+output/
+output_v2/
+outputs/
+
